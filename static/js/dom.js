@@ -43,6 +43,7 @@ let dom = {
             
         // create thead
         var thead = document.createElement("thead");
+        thead.setAttribute("class", "thead-dark");
         var tr_head = document.createElement("tr");
         var names = {0:"Name",1:"Diameter", 2:"Climate",3: "Terrain", 4:"Surface Water Percentage",5: "Population", 6:"Residents"};
 
@@ -80,6 +81,18 @@ let dom = {
                         var text_to_display = document.createTextNode("No known residents");
                         td_body.appendChild(text_to_display);   
                     }
+                }
+                else if (headers_for_planets[head] == 'diameter'){
+                    var text_to_display = document.createTextNode(parseInt(element[headers_for_planets[head]]).toLocaleString() + " km")
+                    td_body.appendChild(text_to_display)
+                }
+                else if (headers_for_planets[head] == 'surface_water'){
+                    var text_to_display = document.createTextNode(element[headers_for_planets[head]] + "%")
+                    td_body.appendChild(text_to_display)
+                }
+                else if (headers_for_planets[head] == 'population' && element[headers_for_planets[head]] != "unknown"){
+                    var text_to_display = document.createTextNode(parseInt(element[headers_for_planets[head]]).toLocaleString() + " people")
+                    td_body.appendChild(text_to_display)
                 }
                 else {
                     var text_to_display = document.createTextNode(element[headers_for_planets[head]])
