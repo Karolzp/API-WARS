@@ -1,0 +1,16 @@
+html {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+    width: 100%;
+    font: arial;
+	}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    }
+
+.selector-for-some-widget {
+    box-sizing: content-box;
+    }
