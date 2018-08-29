@@ -5,14 +5,14 @@ let ajax = {
         xhttp.send();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                var json_dicts_of_planets = JSON.parse(this.responseText);
-                dom.create_pagination(json_dicts_of_planets);
+                var json_dicts_of_planets = JSON.parse(this.responseText); 
+                 
                 dom.create_planets_table(json_dicts_of_planets);                
             }
         };  
     },
 
-    
+
     get_residents_and_display_modal : function(residents_links_list,planet_name){
         document.getElementsByClassName("modal-title")[0].innerHTML = "Residents of " + planet_name;
         document.getElementById("modalTableBody").innerHTML = "";

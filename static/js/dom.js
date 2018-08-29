@@ -2,6 +2,14 @@ let dom = {
     next : null,
     previous : null,
 
+    create_header : function(){
+        document.getElementById('planetHeader').innerHTML = "Star Wars universe planets";
+    },
+    delete_header :function(){
+        document.getElementById('planetHeader').innerHTML = "";
+    },
+
+
     create_navbar : function(){
         let navbar = document.createElement('nav');
         navbar.setAttribute('class', 'navbar navbar-expand-sm bg-dark navbar-dark fixed-top')
@@ -10,13 +18,13 @@ let dom = {
         document.getElementById('navbar').innerHTML =
                 '<ul class="navbar-nav">'
                     +'<li class="nav-item">'
-                        +'<a class="nav-link" href="#">Planet list</a>'
+                        +'<a class="nav-link" href="/">Planet list</a>'
                     +'</li>'
                     +'<li class="nav-item">'
                         +'<a class="nav-link" href="#">Voting statistics</a>'
                     +'</li>'
                     +'<li class="nav-item">'
-                        +'<a class="nav-link" href="#">Registration</a>'
+                        +'<a class="nav-link" href="#" onclick="registrationDom.createRegistrationElements()">Registration</a>'
                     +'</li>'
                     +'<li class="nav-item">'
                         +'<a class="nav-link" href="#">Login</a>'
@@ -34,7 +42,7 @@ let dom = {
         this.previous = json_dicts_of_planets.previous;
 
         var pagination = document.getElementsByClassName("pagination")[0];
-        pagination.innerHTML = "";
+
 
         // create previos page button
         var previous_page = document.createElement("li");
@@ -63,9 +71,12 @@ let dom = {
 
 
     create_planets_table : function(json_dicts_of_planets){
-        var planets = json_dicts_of_planets.results;
+        
+        dom.delete_table_and_pagination();
+        dom.create_pagination(json_dicts_of_planets);
+
         var table = document.getElementsByClassName("table table-bordered")[0];
-        table.innerHTML = "";
+        var planets = json_dicts_of_planets.results;
             
         // create thead
         var thead = document.createElement("thead");
@@ -131,6 +142,17 @@ let dom = {
             table.appendChild(tbody)        
             });
         },
+        delete_table_and_pagination : function(){
+            
+
+            var table = document.getElementsByClassName("table table-bordered")[0];
+            table.innerHTML = "";
+
+            var pagination = document.getElementsByClassName("pagination")[0];
+            pagination.innerHTML = "";
+
+        },
+    
 
 
         create_modal : function() {
