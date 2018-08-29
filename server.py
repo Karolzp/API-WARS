@@ -10,7 +10,12 @@ def main():
     
 @app.route("/register", methods = ['GET', 'POST'])
 def register_new_user():
-    return ""
+    register_input = request.get_json()
+    if logic.check_if_user_in_database(register_input) == True:
+        return json.dumps(False)
+    logic.register_new_user(register_input)
+    return json.dumps(True)
+    
 
 if __name__ == '__main__':
     app.run(debug=True,

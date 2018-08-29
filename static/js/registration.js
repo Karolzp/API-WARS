@@ -1,11 +1,11 @@
 var registrationDom = {
-    createRegistrationElements : function(){
+    create_registration_elements : function(){
         dom.delete_table_and_pagination();
         dom.delete_header();
-        let registerContainer = document.createElement('div');
-        registerContainer.setAttribute('class', 'register-container');
-        registerContainer.setAttribute('id', 'register-container');
-        document.body.appendChild(registerContainer);
+        let register_container = document.createElement('div');
+        register_container.setAttribute('class', 'register-container');
+        register_container.setAttribute('id', 'register-container');
+        document.body.appendChild(register_container);
         document.getElementById('register-container').innerHTML = 
             '<div class="form-group">'
                 +'<label for="username">Username:</label>'
@@ -15,7 +15,26 @@ var registrationDom = {
                 +'<label for="password">Password:</label>'
                 +'<input type="password" class="form-control" id="password" placeholder="Enter password" name="password">'
             +'</div>'
-            +'<button  class="btn btn-primary">Register</button>' 
+            +'<button onclick="registrationDom.register()" class="btn btn-primary">Register</button>' 
+    },
+
+    delete_regiatration_elements : function(){
+        let register_container = document.getElementById("register-container");
+        register_container.parentNode.removeChild(register_container);
+    },
+
+    get_register_input : function(){
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        let usernameAndPassword = { username : username, password : password };
+        return usernameAndPassword;
+    },
+
+    register : function(){
+        let register_input = this.get_register_input();
+        // this.delete_regiatration_elements();
+        // dom.create_main_table();
+        ajax.send_register_input(register_input);
     }
 
 

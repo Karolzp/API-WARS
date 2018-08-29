@@ -1,10 +1,19 @@
 let dom = {
     next : null,
     previous : null,
+    create_main_table : function(){
+        dom.create_header();
+        var first_page_link = "https://swapi.co/api/planets";
+        ajax.get_planets_and_display_table(first_page_link);
+        dom.create_modal();
+    },
+
 
     create_header : function(){
         document.getElementById('planetHeader').innerHTML = "Star Wars universe planets";
     },
+
+
     delete_header :function(){
         document.getElementById('planetHeader').innerHTML = "";
     },
@@ -24,7 +33,7 @@ let dom = {
                         +'<a class="nav-link" href="#">Voting statistics</a>'
                     +'</li>'
                     +'<li class="nav-item">'
-                        +'<a class="nav-link" href="#" onclick="registrationDom.createRegistrationElements()">Registration</a>'
+                        +'<a class="nav-link" href="#" onclick="registrationDom.create_registration_elements()">Registration</a>'
                     +'</li>'
                     +'<li class="nav-item">'
                         +'<a class="nav-link" href="#">Login</a>'
