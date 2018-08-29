@@ -2,6 +2,32 @@ let dom = {
     next : null,
     previous : null,
 
+    create_navbar : function(){
+        let navbar = document.createElement('nav');
+        navbar.setAttribute('class', 'navbar navbar-expand-sm bg-dark navbar-dark fixed-top')
+        navbar.setAttribute('id', 'navbar')
+        document.body.appendChild(navbar);
+        document.getElementById('navbar').innerHTML =
+                '<ul class="navbar-nav">'
+                    +'<li class="nav-item">'
+                        +'<a class="nav-link" href="#">Planet list</a>'
+                    +'</li>'
+                    +'<li class="nav-item">'
+                        +'<a class="nav-link" href="#">Voting statistics</a>'
+                    +'</li>'
+                    +'<li class="nav-item">'
+                        +'<a class="nav-link" href="#">Registration</a>'
+                    +'</li>'
+                    +'<li class="nav-item">'
+                        +'<a class="nav-link" href="#">Login</a>'
+                    +'</li>'
+                    +'<li class="nav-item">'
+                        +'<a class="nav-link" href="#">Logout</a>'
+                    +'</li>'
+                +'</ul>'
+                +'<span class="navbar-text"></span>'
+    },
+
 
     create_pagination : function(json_dicts_of_planets){
         this.next = json_dicts_of_planets.next;
@@ -15,7 +41,7 @@ let dom = {
         previous_page.setAttribute("class", "page-item");
         var previous_button = document.createElement("button");
         previous_button.setAttribute("type", "button");
-        previous_button.setAttribute("class", "previos");
+        previous_button.setAttribute("class", "btn btn-primary");
         previous_button.setAttribute("onclick", "ajax.get_planets_and_display_table(dom.previous)");
         var text_to_display = document.createTextNode("Previous");
         previous_button.appendChild(text_to_display);
@@ -27,7 +53,7 @@ let dom = {
         next_page.setAttribute("class", "page-item");
         var next_buttton = document.createElement("button");
         next_buttton.setAttribute("type", "button");
-        next_buttton.setAttribute("class", "next");
+        next_buttton.setAttribute("class", "btn btn-primary");
         next_buttton.setAttribute("onclick", "ajax.get_planets_and_display_table(dom.next)");
         var text_to_display = document.createTextNode("Next");
         next_buttton.appendChild(text_to_display);
@@ -86,7 +112,7 @@ let dom = {
                     var text_to_display = document.createTextNode(parseInt(element[headers_for_planets[head]]).toLocaleString() + " km")
                     td_body.appendChild(text_to_display)
                 }
-                else if (headers_for_planets[head] == 'surface_water'){
+                else if (headers_for_planets[head] == 'surface_water' && element[headers_for_planets[head]] != "unknown"){
                     var text_to_display = document.createTextNode(element[headers_for_planets[head]] + "%")
                     td_body.appendChild(text_to_display)
                 }
@@ -121,7 +147,7 @@ let dom = {
                             +'</div>'                         
                             +'<div class="modal-body">'
                                 +'<table class="table table-bordered">'
-                                    +'<thead>'
+                                    +'<thead class="thead-dark">'
                                         +'<tr>'
                                             +'<th>Name</th>'
                                             +'<th>Height</th>'

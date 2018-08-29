@@ -11,6 +11,22 @@ body {
     padding: 0px;
     }
 
+h1 {
+    padding-top: 68px;
+    padding-bottom: 10px;
+}
+.navbar li{
+    font-size: 1em;
+    margin-left: 20px;
+}
+.navbar span{
+    position: absolute;
+    right: 40px;
+}
+
 .selector-for-some-widget {
     box-sizing: content-box;
     }
+.btn-primary {
+    margin-right: 2px;
+}
