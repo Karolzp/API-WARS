@@ -1,11 +1,10 @@
 var registrationDom = {
-    create_registration_elements : function(){
+    create_registration_form : function(){
         dom.delete_table_and_pagination();
+        
         dom.delete_header();
-        let register_container = document.createElement('div');
-        register_container.setAttribute('class', 'register-container');
+        let register_container = document.getElementsByClassName("login-container")[0];
         register_container.setAttribute('id', 'register-container');
-        document.body.appendChild(register_container);
         document.getElementById('register-container').innerHTML = 
             '<div class="form-group">'
                 +'<label for="username">Username:</label>'
@@ -18,7 +17,7 @@ var registrationDom = {
             +'<button onclick="registrationDom.register()" class="btn btn-primary">Register</button>' 
     },
 
-    delete_regiatration_elements : function(){
+    delete_registration_form : function(){
         let register_container = document.getElementById("register-container");
         register_container.parentNode.removeChild(register_container);
     },
@@ -32,7 +31,7 @@ var registrationDom = {
 
     register : function(){
         let register_input = this.get_register_input();
-        // this.delete_regiatration_elements();
+        // this.delete_regiatration_form();
         // dom.create_main_table();
         ajax.send_register_input(register_input);
     }

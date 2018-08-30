@@ -22,3 +22,14 @@ def check_if_user_in_databse(cursor, username):
                 )
     username = cursor.fetchall()
     return username
+
+@persistence.connection_handler
+def get_user_password(cursor, username):
+    cursor.execute(
+        sql.SQL("""
+                    SELECT password FROM users
+                    WHERE username = %(username)s;
+                """), {'username': username}
+                )
+    password = cursor.fetchall()
+    return password

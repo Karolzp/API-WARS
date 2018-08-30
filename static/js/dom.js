@@ -1,4 +1,5 @@
 let dom = {
+    active_user : '',
     next : null,
     previous : null,
     create_main_table : function(){
@@ -33,16 +34,26 @@ let dom = {
                         +'<a class="nav-link" href="#">Voting statistics</a>'
                     +'</li>'
                     +'<li class="nav-item">'
-                        +'<a class="nav-link" href="#" onclick="registrationDom.create_registration_elements()">Registration</a>'
+                        +'<a id="navbarRegistration" class="nav-link" href="#" onclick="registrationDom.create_registration_form()">Registration</a>'
+                    +'</li>'
+                    +'<li class="nav-item" id>'
+                        +'<a id="navbarLogin" class="nav-link" href="#" onclick="loginDom.create_login_form()">Login</a>'
                     +'</li>'
                     +'<li class="nav-item">'
-                        +'<a class="nav-link" href="#">Login</a>'
-                    +'</li>'
-                    +'<li class="nav-item">'
-                        +'<a class="nav-link" href="#">Logout</a>'
+                        +'<a id="navbarLogout" class="nav-link disabled" href="#">Logout</a>'
                     +'</li>'
                 +'</ul>'
-                +'<span class="navbar-text"></span>'
+                +'<span id="navbarText" class="navbar-text"></span>'
+    },
+
+    change_nav_bar : function(){
+        document.getElementById("navbarRegistration").setAttribute("class", "nav-link disabled");
+        document.getElementById("navbarRegistration").setAttribute("onclick", "");
+        document.getElementById("navbarLogin").setAttribute("class", "nav-link disabled");
+        document.getElementById("navbarLogin").setAttribute("onclick", "");
+        document.getElementById("navbarLogout").setAttribute("class", "nav-link");
+        document.getElementById("navbarLogout").setAttribute("onclick", "ajax.logout(dom.active_user)");
+        document.getElementById("navbarText").innerHTML= "Signed in as " + this.active_user;
     },
 
 

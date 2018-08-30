@@ -35,16 +35,41 @@ let ajax = {
     send_register_input : function(register_input){
         let url = '/register'
         let converted_register_input = JSON.stringify(register_input);
-        let result = this.send_to_server(url, converted_register_input).then(function(data) {
-            registrationDom.delete_regiatration_elements();
+        this.send_to_server(url, converted_register_input).then(function(data) {
+            registrationDom.delete_registration_form();
             dom.create_main_table();
             alert('Thank you for registration.');
         }).catch(function(err) {
             alert('Something went wrong. Please try again.');
         });
+    },
 
 
+    send_login_input : function(register_input){
+        let url = '/login'
+        let converted_login_input = JSON.stringify(register_input);
+        this.send_to_server(url, converted_login_input).then(function(data) {
+            loginDom.delete_login_form();
+            dom.active_user = data;
+            dom.change_nav_bar();
+            dom.create_main_table();
 
+        }).catch(function(err) {
+            alert('Something went wrong. Please try again.');
+        });
+
+    },
+
+    logout : function(active_user){
+        let endpoint = '/logout'
+        let converted_active_user = JSON.stringify(active_user);
+        this.send_to_server(endpoint, converted_active_user).then(function(data) {
+            dom.delete_table_and_pagination();
+            dom.active_user = "";
+            init();
+        }).catch(function(err) {
+            alert('Something went wrong. Please try again.');
+        });
     },
 
     send_to_server: function (url, data_to_Send) {
