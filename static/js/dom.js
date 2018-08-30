@@ -104,6 +104,10 @@ let dom = {
         var tr_head = document.createElement("tr");
         var names = {0:"Name",1:"Diameter", 2:"Climate",3: "Terrain", 4:"Surface Water Percentage",5: "Population", 6:"Residents"};
 
+        if (dom.active_user != ""){
+            names[7]="";
+        }
+
         for (var elem in names){
             var th_head = document.createElement("th");
             var text_to_display = document.createTextNode(names[elem]);
@@ -115,7 +119,7 @@ let dom = {
 
         //create tbody
         var tbody = document.createElement("tbody");
-        var headers_for_planets = {0:"name",1:"diameter", 2:"climate",3: "terrain", 4:"surface_water",5: "population", 6:"residents"};
+        var headers_for_planets = {0:"name",1:"diameter", 2:"climate",3: "terrain", 4:"surface_water",5: "population", 6:"residents", 7: ""};
                   
         planets.forEach(element => {
             var tr_body = document.createElement("tr");
@@ -132,30 +136,47 @@ let dom = {
                         let number_of_residents = element["residents"].length;
                         var text_to_display = document.createTextNode(number_of_residents.toString() + " resident(s)");
                         btn.appendChild(text_to_display);
-                        td_body.appendChild(btn);                        
+                        td_body.appendChild(btn);  
+                        tr_body.appendChild(td_body)                      
                     }
                     else {
                         var text_to_display = document.createTextNode("No known residents");
-                        td_body.appendChild(text_to_display);   
+                        td_body.appendChild(text_to_display);  
+                        tr_body.appendChild(td_body) 
                     }
                 }
                 else if (headers_for_planets[head] == 'diameter'){
                     var text_to_display = document.createTextNode(parseInt(element[headers_for_planets[head]]).toLocaleString() + " km")
                     td_body.appendChild(text_to_display)
+                    tr_body.appendChild(td_body)
                 }
                 else if (headers_for_planets[head] == 'surface_water' && element[headers_for_planets[head]] != "unknown"){
                     var text_to_display = document.createTextNode(element[headers_for_planets[head]] + "%")
                     td_body.appendChild(text_to_display)
+                    tr_body.appendChild(td_body)
                 }
                 else if (headers_for_planets[head] == 'population' && element[headers_for_planets[head]] != "unknown"){
                     var text_to_display = document.createTextNode(parseInt(element[headers_for_planets[head]]).toLocaleString() + " people")
                     td_body.appendChild(text_to_display)
+                    tr_body.appendChild(td_body)
+                }
+                else if (headers_for_planets[head] == ''){
+                    if (dom.active_user != ""){
+                        var btn = document.createElement("button");
+                        btn.setAttribute("type", "button");
+                        btn.setAttribute("class","btn");
+                        var text_to_display = document.createTextNode("Vote");
+                        btn.appendChild(text_to_display);
+                        td_body.appendChild(btn);  
+                        tr_body.appendChild(td_body)
+                    }
                 }
                 else {
                     var text_to_display = document.createTextNode(element[headers_for_planets[head]])
                     td_body.appendChild(text_to_display)
+                    tr_body.appendChild(td_body)
                 }               
-                tr_body.appendChild(td_body)
+                
             }
 
             tbody.appendChild(tr_body)
