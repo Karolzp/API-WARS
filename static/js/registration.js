@@ -18,8 +18,8 @@ var registrationDom = {
     },
 
     delete_registration_form : function(){
-        let register_container = document.getElementById("register-container");
-        register_container.parentNode.removeChild(register_container);
+        let register_container = document.getElementById("register-container").innerHTML = "";
+
     },
 
     get_register_input : function(){

@@ -50,6 +50,7 @@ let ajax = {
         let converted_login_input = JSON.stringify(register_input);
         this.send_to_server(url, converted_login_input).then(function(data) {
             loginDom.delete_login_form();
+            ajax.get_voted_planets();
             dom.active_user = data;
             dom.change_nav_bar();
             dom.create_main_table();
@@ -60,11 +61,11 @@ let ajax = {
 
     },
 
-    logout : function(active_user){
+    logout : function(){
         let endpoint = '/logout'
-        let converted_active_user = JSON.stringify(active_user);
-        this.send_to_server(endpoint, converted_active_user).then(function(data) {
+        this.send_to_server(endpoint).then(function(data) {
             dom.delete_table_and_pagination();
+            dom.voted_planets = "",
             dom.active_user = "";
             dom.create_navbar();
             dom.create_main_table();
@@ -77,12 +78,35 @@ let ajax = {
         let endpoint = '/'
         this.send_to_server(endpoint).then(function(data) {
             dom.active_user = data;
+            ajax.get_voted_planets(); 
             dom.change_nav_bar();  
             dom.create_main_table(); 
         }).catch(function(err) {
             dom.active_user = "";
             dom.create_main_table(); 
         });
+    },
+
+
+    get_voted_planets : function() {
+        let endpoint = '/voted_planets'
+        this.send_to_server(endpoint).then(function(data) {
+            dom.voted_planets = data;
+        }).catch(function(err) {
+            alert('Something went wrong. Please try again.');
+        });
+
+    },
+
+    send_vote : function(vote_input){
+        let endpoint = '/vote'
+        let converted_vote_input = JSON.stringify(vote_input);
+        this.send_to_server(endpoint, converted_vote_input).then(function(data) {
+            
+        }).catch(function(err) {
+            alert('not voted. Please try again.');
+        });
+
     },
 
 

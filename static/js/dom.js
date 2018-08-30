@@ -1,12 +1,21 @@
 let dom = {
-    active_user : '',
+    active_user : "",
+    voted_planets : [],
     next : null,
     previous : null,
+
+    update_voted_planets : function(){
+        ajax.get_voted_planets();
+
+    },
+
     create_main_table : function(){
         dom.create_header();
         var first_page_link = "https://swapi.co/api/planets";
         ajax.get_planets_and_display_table(first_page_link);
         dom.create_modal();
+    
+       
     },
 
 
@@ -52,7 +61,7 @@ let dom = {
         document.getElementById("navbarLogin").setAttribute("class", "nav-link disabled");
         document.getElementById("navbarLogin").setAttribute("onclick", "");
         document.getElementById("navbarLogout").setAttribute("class", "nav-link");
-        document.getElementById("navbarLogout").setAttribute("onclick", "ajax.logout(dom.active_user)");
+        document.getElementById("navbarLogout").setAttribute("onclick", "ajax.logout()");
         document.getElementById("navbarText").innerHTML= "Signed in as " + this.active_user;
     },
 
@@ -165,7 +174,13 @@ let dom = {
                         var btn = document.createElement("button");
                         btn.setAttribute("type", "button");
                         btn.setAttribute("class","btn");
-                        var text_to_display = document.createTextNode("Vote");
+                        if (dom.voted_planets.indexOf(element["name"]) > -1){
+                            var text_to_display = document.createTextNode("Voted!");
+                        } else {
+                            btn.onclick = function() { dom.vote(element, btn)};
+                            var text_to_display = document.createTextNode("Vote");
+                        }
+                        
                         btn.appendChild(text_to_display);
                         td_body.appendChild(btn);  
                         tr_body.appendChild(td_body)
@@ -249,6 +264,19 @@ let dom = {
                 }
                 tbody.appendChild(tr_body);
             });
+        },
+
+
+        vote : function(planet, btn){
+            btn.setAttribute("onclick", "");
+            btn.innerHTML = "Voted!"
+            planet_name = planet["name"];
+            this.voted_planets.push(planet_name);
+            swapi_planet_url = planet["url"];
+            planet_id = swapi_planet_url.slice(29,-1);
+            vote_input = {planet_name : planet_name ,planet_id : planet_id}
+            ajax.send_vote(vote_input);
+
         }
       
     }

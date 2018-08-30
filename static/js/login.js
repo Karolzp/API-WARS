@@ -19,8 +19,7 @@ var loginDom = {
 
 
     delete_login_form : function(){
-        let login_container = document.getElementById("login-container");
-        login_container.parentNode.removeChild(login_container);
+        let login_container = document.getElementById("login-container").innerHTML= "";
     },
 
     get_login_input : function(){
