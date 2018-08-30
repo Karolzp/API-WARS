@@ -1,6 +1,10 @@
 function  init(){
     dom.create_navbar();
-    dom.create_main_table();
+    ajax.check_if_somebody_logged()
+   
+    
+    
+    
 }
 
 init();

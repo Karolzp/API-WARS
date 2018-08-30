@@ -5,10 +5,16 @@ import logic
 app = Flask(__name__)
 app.secret_key = 'api'
 
-@app.route('/')
+
+@app.route('/', methods = ['GET', 'POST'])
 def main():
+    if request.method == 'POST':
+        if 'username' in session:
+            return json.dumps(session['username'])
+        return json.dumps(False)
     return render_template('index.html')
-    
+
+
 @app.route("/register", methods = ['GET', 'POST'])
 def register_new_user():
     register_input = request.get_json()
@@ -17,6 +23,7 @@ def register_new_user():
     logic.register_new_user(register_input)
     return json.dumps(True)
     
+
 @app.route("/login", methods = ['GET', 'POST'])
 def login():
     login_input = request.get_json()
@@ -28,6 +35,7 @@ def login():
         return json.dumps(username)   
     print(username)      
     return json.dumps(False)
+
 
 @app.route("/logout", methods = ['GET', 'POST'])
 def logout_user():

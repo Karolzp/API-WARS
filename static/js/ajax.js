@@ -66,11 +66,25 @@ let ajax = {
         this.send_to_server(endpoint, converted_active_user).then(function(data) {
             dom.delete_table_and_pagination();
             dom.active_user = "";
-            init();
+            dom.create_navbar();
+            dom.create_main_table();
         }).catch(function(err) {
             alert('Something went wrong. Please try again.');
         });
     },
+
+    check_if_somebody_logged : function(){
+        let endpoint = '/'
+        this.send_to_server(endpoint).then(function(data) {
+            dom.active_user = data;
+            dom.change_nav_bar();  
+            dom.create_main_table(); 
+        }).catch(function(err) {
+            dom.active_user = "";
+            dom.create_main_table(); 
+        });
+    },
+
 
     send_to_server: function (url, data_to_Send) {
         return new Promise(function(resolve, reject) {
