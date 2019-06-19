@@ -10,6 +10,7 @@ The goal was to create web application using JavaScript, Flask and connect it wi
 * Flask (micro web framework)
 * HTML
 * CSS
+* AJAX
 * Bootstrap
 * Psycopg (the most popular PostgreSQL database adapter for the Python)
 
