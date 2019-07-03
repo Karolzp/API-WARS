@@ -13,6 +13,7 @@ The project was created during my education in Codecool.
 * CSS
 * AJAX
 * Bootstrap
+* SQL
 * Psycopg (the most popular PostgreSQL database adapter for the Python)
 
 
