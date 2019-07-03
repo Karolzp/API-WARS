@@ -1,5 +1,6 @@
 # API WARS
 
+## About App:
 This is a small web application which shows data about the Star Wars universe.
 
 ## About project:
