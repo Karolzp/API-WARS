@@ -5,7 +5,7 @@ This is a small web application which shows data about the Star Wars universe.
 
 ## About project:
 This is the project created during my education in Codecool.<br/>
-The goal was to:
+**The goal was to:**
 * practice front-end skills:
   * JavaScript
   * AJAX
