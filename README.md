@@ -8,6 +8,7 @@ This is the project created during my education in Codecool.<br/>
 The goal was to:
 * practice front-end skills:
   * JavaScript
+  * AJAX
   * HTML/CSS
   * DOM manipulation
   * web design
