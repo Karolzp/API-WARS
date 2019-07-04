@@ -21,7 +21,7 @@ This is the project created during my education in Codecool.<br/>
 
 ## Used technology:
 * JavaScript
-* Flask (micro web framework)
+* Flask (micro web framework for Python)
 * HTML
 * CSS
 * AJAX
